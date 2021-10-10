@@ -66,6 +66,7 @@ block body
       } else {
         lineTransformer.ended = true
         transformStream.ended = true
+        done()
       }
     });
 
