@@ -6,6 +6,8 @@ import transformStream from '../index.js'
 import intoStream from 'into-stream'
 import concat from 'concat-stream';
 import lineTransformer from '../../line-transformer/index.js'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
 
 describe('test', function () {
   it('should match a known working example', function (done) {
@@ -81,8 +83,7 @@ NODENT2 html(lang='en-US')
 INDENT3 head
 INDENT4 style(type="text/scss").
 INDENT5 .h1 span, .h1 span span { display: inline-block; position: relative; }
-DEDENT6 
-div
+DEDENT6 div
 NODENT7 pre: code(class="language-scss").
 INDENT8 #fadeOutDemo span {
 INDENT9 display: inline
@@ -90,14 +91,11 @@ NODENT10 opacity: 1;
 NODENT11 &.myFadeOut {
 INDENT12 opacity: 0;
 NODENT13 transition: opacity 2s;
-DEDENT14 
-}
-DEDENT15 
-}
-DEDENT16 
-DEDENT16 
-DEDENT16 
-block body
+DEDENT14 }
+DEDENT15 }
+DEDENT16
+DEDENT16
+DEDENT16 block body
 INDENT17 .container#fadeOutDemo
 INDENT18 p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mollis accumsan mattis. Aenean eros magna, maximus nec accumsan at, ultrices non velit. Duis tempus tellus a lectus dignissim, consectetur hendrerit urna lacinia. Nam vitae placerat tortor. Phasellus non odio blandit, posuere urna in, pulvinar ligula. Quisque et tincidunt sapien. Proin eget nibh vitae justo pulvinar tincidunt. In hac habitasse platea dictumst. In non accumsan lacus, in consequat nisl. Nunc sodales luctus nunc. Aenean vitae sem consectetur, semper quam a, venenatis sem. Quisque posuere erat at neque bibendum ornare nec a magna. Praesent aliquam commodo luctus. Nulla facilisi.
 NODENT20 p Maecenas pulvinar, nulla a dictum pulvinar, sapien justo dapibus metus, et luctus libero dolor elementum dui. Praesent et libero sed odio dapibus accumsan ac sit amet justo. Vivamus eu massa nec nunc fringilla mollis et sed enim. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam iaculis sollicitudin sodales. Sed gravida vel magna nec mollis. Vestibulum eget nibh magna. Nunc congue vitae purus id mattis. Nunc malesuada non eros in facilisis. Nunc blandit lectus hendrerit blandit facilisis. Quisque vitae dolor lectus. Duis tortor erat, pharetra a nulla ac, varius porttitor sapien. Sed tellus lectus, posuere ut tincidunt sit amet, eleifend id neque. Vestibulum sed commodo nunc, ac maximus nunc.
@@ -106,21 +104,18 @@ NODENT24 p Nulla posuere sem a enim fringilla, id maximus nisi ornare. Nam ac so
 NODENT26 p Etiam vel mi sollicitudin, luctus velit vitae, accumsan velit. Phasellus non feugiat metus, eu dignissim nulla. Cras ex arcu, faucibus ac hendrerit sit amet, volutpat sit amet justo. Donec ligula lacus, iaculis a lobortis et, facilisis vitae metus. Nulla id massa in turpis efficitur ornare. Quisque euismod fringilla lorem a placerat. Praesent non velit orci. Suspendisse vel mi sed tellus tincidunt venenatis. Phasellus eu tempor nisi. Nullam rutrum consequat euismod. Cras ut blandit erat. Sed iaculis, ex nec finibus vehicula, mauris ligula placerat lacus, dictum viverra neque lectus eget dolor. Nullam finibus ligula vitae lacus eleifend, id sagittis leo molestie.
 NODENT27 p Netlify does most of the work. Follow the directions
 INDENT28 a(href="https://docs.netlify.com/domains-https/custom-domains/configure-external-dns/#configure-an-apex-domain") here
-DEDENT31 
-h2 Results
+DEDENT31 h2 Results
 NODENT32 p Since I really enjoy learning this has been awesome.
 NODENT34 h2 Conclusion
 NODENT35 p If you have a chance to learn something new, then do it!
-DEDENT37 
-script(type="module").
+DEDENT37 script(type="module").
 INDENT38 import _ from 'lodash'
 NODENT39 import _debug from 'debug'
 NODENT40 const debug = _debug('aakoch:pugAnimation')
 NODENT42 jQuery(() => {
 INDENT43 $("#bandwagonLink").one("mouseenter", function() {
 INDENT44 $(this).fadeOut(2000);
-DEDENT45 
-});
+DEDENT45 });
 DEDENT99999 DEDENT99999 DEDENT99999 `)
       }))
   })
