@@ -12,14 +12,10 @@ const indentTransformer = new stream.Transform({
     try {
       debug('inside flush')
       if (this.ended) {
-        // const ret = []
         while (1 < this.stack[0]) {
           this.stack.shift()
-          // leaving this as a separate push for each makes the next transformer treat each as a separate call
           this.push('DEDENT99999 ');
-          // ret.push('DEDENT');
         }
-        // this.push(ret.join(' '))
       }
       callback()
     } catch (e) {
@@ -28,17 +24,19 @@ const indentTransformer = new stream.Transform({
   },
   transform(chunk, enc, callback) {
     const ret = []
+    chunk = chunk.toString()
     debug('chunk=' + chunk)
-    const splitted = chunk.toString().split('|', 2)
-    const lineNo = splitted[0]
-    debug('lineNo=' + lineNo)
-    let line = splitted[1]
-    if (splitted.length > 2) {
-      line += splitted.slice(2).join('')
-    }
 
+    const indexOfPipe = chunk.indexOf('|')
+
+    const lineNo = chunk.substring(0, indexOfPipe)
+    debug('lineNo=' + lineNo)
+    
+    let line = chunk.substring(indexOfPipe + 1)
+    debug('line=', line)
+    
     if (line.trim().length > 0) {
-      debug('line=' + line)
+      // debug('2 line=' + line)
       const matches = line.match(/^(  |\t)*/)
       debug('matches=', matches)
 
@@ -51,13 +49,17 @@ const indentTransformer = new stream.Transform({
         }
         else if (numOfSpaces < this.stack[0]) {
           debug('before shift: this.stack=', this.stack)
+          debug('numOfSpaces < this.stack[1]', numOfSpaces < this.stack[1])
           while (numOfSpaces < this.stack[1]) {
+            debug('inside while loop')
             this.stack.shift()
-            ret.push('DEDENT' + lineNo + '\n')
+            ret.push('DEDENT' + lineNo + ' \n')
           }
+          debug('exited while loop')
           this.stack.shift()
           ret.push('DEDENT' + lineNo + ' ' + line.trim() + '\n')
           debug('after shift: this.stack=', this.stack)
+          debug('after shift: ret=', ret)
         }
         else {
           ret.push('NODENT' + lineNo + ' ' + line.trim() + '\n')
@@ -74,6 +76,9 @@ const indentTransformer = new stream.Transform({
     }
     debug('returning=' + ret.join(''))
     this.push(ret.join(''))
+    // ret.join('').split('\n').forEach(line => {
+    //   this.push(line)
+    // })
     callback();
   }
 })
@@ -89,7 +94,20 @@ indentTransformer.stack = [0]
 
 if (process.argv[1] == __filename) {
   const fileReader = fs.createReadStream(process.argv[2])
-  fileReader.pipe(lineTransformer).pipe(indentTransformer).pipe(process.stdout)
+  stream.finished(fileReader, (err) => {
+    if (err) {
+      console.error('Stream failed', err);
+    } else {
+      indentTransformer.ended = true
+    }
+  });
+
+  const fileOut = fs.createWriteStream('out.txt')
+  fileReader
+      .pipe(lineTransformer)
+      .pipe(indentTransformer)
+      // .pipe(fileOut)
+      .pipe(process.stdout)
 }
 
 export default indentTransformer
