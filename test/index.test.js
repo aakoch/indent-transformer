@@ -9,6 +9,45 @@ import lineTransformer from '../../line-transformer/index.js'
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 
+function findFirstDifferentCharacter(str1, str2) {
+  if (str1 === str2) {
+    return -1
+  }
+  for (let index = 0; index < Math.min(str1.length, str2.length); index++) {
+    const char = str1[index];
+    if (char !== str2[index]) {
+      return index
+    }
+  }
+  return index
+}
+
+chai.Assertion.overwriteMethod('equal', function (_super) {
+  return function (obj2) {
+    var obj = this._obj;
+    if (typeof obj === 'string' && typeof obj2 === 'string' && 
+        obj.length > 20) {
+
+      const context = 5
+      const firstDiffInx = findFirstDifferentCharacter(obj, obj2)
+      const expMsg = '...' + obj.substring(Math.max(0, firstDiffInx - context), Math.min(obj.length, firstDiffInx + context)) + '...'
+      const actMsg = '...' + obj2.substring(Math.max(0, firstDiffInx - context), Math.min(obj2.length, firstDiffInx + context)) + '...'
+
+      const expActMsg = obj.substring(0, Math.min(obj.length, 80)) + "..."
+      const actActMsg = obj2.substring(0, Math.min(obj2.length, 80)) + "..."
+      this.assert(
+        obj === obj2
+        , "expected \"" + expActMsg + "\" to equal \"" + actActMsg + "\" but they started to differ at position " +  firstDiffInx
+        , "expected \"" + expActMsg + "\" not to be equal to \"" + actActMsg + "\""
+        , expMsg // expected
+        , actMsg // actual
+      );
+    } else {
+      _super.apply(this, arguments);
+    }
+  };
+});
+
 describe('test', function () {
   it('should match a known working example', function (done) {
     const input = `doctype html
@@ -39,7 +78,7 @@ block body
     p Etiam vel mi sollicitudin, luctus velit vitae, accumsan velit. Phasellus non feugiat metus, eu dignissim nulla. Cras ex arcu, faucibus ac hendrerit sit amet, volutpat sit amet justo. Donec ligula lacus, iaculis a lobortis et, facilisis vitae metus. Nulla id massa in turpis efficitur ornare. Quisque euismod fringilla lorem a placerat. Praesent non velit orci. Suspendisse vel mi sed tellus tincidunt venenatis. Phasellus eu tempor nisi. Nullam rutrum consequat euismod. Cras ut blandit erat. Sed iaculis, ex nec finibus vehicula, mauris ligula placerat lacus, dictum viverra neque lectus eget dolor. Nullam finibus ligula vitae lacus eleifend, id sagittis leo molestie.
     p Netlify does most of the work. Follow the directions 
       a(href="https://docs.netlify.com/domains-https/custom-domains/configure-external-dns/#configure-an-apex-domain") here
-      |. The only "gotcha" was I originally had "www.adamkoch.com" as the A record instead of "adamkoch.com". Not a big deal and easy to rectify.
+      | . The only "gotcha" was I originally had "www.adamkoch.com" as the A record instead of "adamkoch.com". Not a big deal and easy to rectify.
 
     h2 Results
     p Since I really enjoy learning this has been awesome. 
@@ -86,15 +125,15 @@ INDENT5 .h1 span, .h1 span span { display: inline-block; position: relative; }
 DEDENT6 div
 NODENT7 pre: code(class="language-scss").
 INDENT8 #fadeOutDemo span {
-INDENT9 display: inline
+INDENT9 display: inline|-block;
 NODENT10 opacity: 1;
 NODENT11 &.myFadeOut {
 INDENT12 opacity: 0;
 NODENT13 transition: opacity 2s;
 DEDENT14 }
 DEDENT15 }
-DEDENT16
-DEDENT16
+DEDENT16 
+DEDENT16 
 DEDENT16 block body
 INDENT17 .container#fadeOutDemo
 INDENT18 p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mollis accumsan mattis. Aenean eros magna, maximus nec accumsan at, ultrices non velit. Duis tempus tellus a lectus dignissim, consectetur hendrerit urna lacinia. Nam vitae placerat tortor. Phasellus non odio blandit, posuere urna in, pulvinar ligula. Quisque et tincidunt sapien. Proin eget nibh vitae justo pulvinar tincidunt. In hac habitasse platea dictumst. In non accumsan lacus, in consequat nisl. Nunc sodales luctus nunc. Aenean vitae sem consectetur, semper quam a, venenatis sem. Quisque posuere erat at neque bibendum ornare nec a magna. Praesent aliquam commodo luctus. Nulla facilisi.
@@ -104,6 +143,7 @@ NODENT24 p Nulla posuere sem a enim fringilla, id maximus nisi ornare. Nam ac so
 NODENT26 p Etiam vel mi sollicitudin, luctus velit vitae, accumsan velit. Phasellus non feugiat metus, eu dignissim nulla. Cras ex arcu, faucibus ac hendrerit sit amet, volutpat sit amet justo. Donec ligula lacus, iaculis a lobortis et, facilisis vitae metus. Nulla id massa in turpis efficitur ornare. Quisque euismod fringilla lorem a placerat. Praesent non velit orci. Suspendisse vel mi sed tellus tincidunt venenatis. Phasellus eu tempor nisi. Nullam rutrum consequat euismod. Cras ut blandit erat. Sed iaculis, ex nec finibus vehicula, mauris ligula placerat lacus, dictum viverra neque lectus eget dolor. Nullam finibus ligula vitae lacus eleifend, id sagittis leo molestie.
 NODENT27 p Netlify does most of the work. Follow the directions
 INDENT28 a(href="https://docs.netlify.com/domains-https/custom-domains/configure-external-dns/#configure-an-apex-domain") here
+NODENT29 | . The only "gotcha" was I originally had "www.adamkoch.com" as the A record instead of "adamkoch.com". Not a big deal and easy to rectify.
 DEDENT31 h2 Results
 NODENT32 p Since I really enjoy learning this has been awesome.
 NODENT34 h2 Conclusion
