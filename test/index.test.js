@@ -5,7 +5,7 @@ import stream from 'stream'
 import transformStream from '../index.js'
 import intoStream from 'into-stream'
 import concat from 'concat-stream';
-import lineTransformer from '../../line-transformer/index.js'
+import WrapLine from '@jaredpalmer/wrapline'
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 
@@ -105,14 +105,18 @@ block body
       if (err) {
         console.error('Stream failed', err);
       } else {
-        lineTransformer.ended = true
         transformStream.ended = true
         done()
       }
     });
 
     inStream
-      .pipe(lineTransformer)
+      .pipe(WrapLine('|'))
+      .pipe(WrapLine(function(pre, line) {
+        // add 'line numbers' to each line
+        pre = pre || 0
+        return pre + 1
+      }))
       .pipe(transformStream)
       .pipe(concat({}, (body) => {
         const actual = body.toString();
@@ -156,7 +160,7 @@ NODENT42 jQuery(() => {
 INDENT43 $("#bandwagonLink").one("mouseenter", function() {
 INDENT44 $(this).fadeOut(2000);
 DEDENT45 });
-DEDENT99999 DEDENT99999 DEDENT99999 `)
+DEDENT45 DEDENT45 DEDENT45 `)
       }))
   })
 })

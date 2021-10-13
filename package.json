@@ -23,7 +23,8 @@
     "@jaredpalmer/wrapline": "^2.0.2",
     "concat-stream": "^2.0.0",
     "debug": "^4.3.2",
-    "into-stream": "^7.0.0"
+    "into-stream": "^7.0.0",
+    "line-transform": "^0.1.0"
   },
   "type": "module"
 }

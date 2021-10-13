@@ -6,23 +6,50 @@ import { fileURLToPath } from 'url';
 import fs from 'fs'
 const __filename = fileURLToPath(import.meta.url);
 const debug = debugFunc('indent-transformer')
+import { LineTransform } from 'line-transform'
 
-const indentTransformer = new stream.Transform({
+const indentTransformer = new LineTransform({
+
   flush(callback) {
     try {
-      debug('inside flush')
-      if (this.ended) {
+      debug('inside flush', this.stack)
         while (1 < this.stack[0]) {
           this.stack.shift()
           this.push('DEDENT99999 ');
         }
-      }
       callback()
     } catch (e) {
       callback(e)
     }
   },
-  transform(chunk, enc, callback) {
+
+  transform(chunk) {
+//     this.push('updated:' + chunk.toString());
+//   }
+
+//   // optional
+//   flush(cb) {
+//     this.push('end');
+//     cb();
+//   }
+// })
+
+// const indentTransformer = new stream.Transform({
+//   flush(callback) {
+//     try {
+//       debug('inside flush')
+//       if (this.ended) {
+//         while (1 < this.stack[0]) {
+//           this.stack.shift()
+//           this.push('DEDENT99999 ');
+//         }
+//       }
+//       callback()
+//     } catch (e) {
+//       callback(e)
+//     }
+//   },
+//   transform(chunk, enc, callback) {
     const ret = []
     chunk = chunk.toString()
     debug('chunk=' + chunk)
@@ -79,7 +106,7 @@ const indentTransformer = new stream.Transform({
     // ret.join('').split('\n').forEach(line => {
     //   this.push(line)
     // })
-    callback();
+    // callback();
   }
 })
 indentTransformer.stack = [0]
