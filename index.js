@@ -1,7 +1,7 @@
 import path from 'path'
 import stream from 'stream'
 import debugFunc from 'debug'
-import lineTransformer from '../line-transformer/index.js'
+import WrapLine from '@jaredpalmer/wrapline'
 import { fileURLToPath } from 'url';
 import fs from 'fs'
 const __filename = fileURLToPath(import.meta.url);
@@ -104,7 +104,12 @@ if (process.argv[1] == __filename) {
 
   const fileOut = fs.createWriteStream('out.txt')
   fileReader
-      .pipe(lineTransformer)
+      .pipe(WrapLine('|'))
+      .pipe(WrapLine(function(pre, line) {
+        // add 'line numbers' to each line
+        pre = pre || 0
+        return pre + 1
+      }))
       .pipe(indentTransformer)
       // .pipe(fileOut)
       .pipe(process.stdout)
