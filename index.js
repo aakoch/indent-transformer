@@ -98,7 +98,7 @@ const indentTransformer = new LineTransform({
         debug('before shift: this.stack=', this.stack)
         this.stack.shift()
         debug('after shift: this.stack=', this.stack)
-        ret.push('DEDENT' + lineNo + ' ');
+        ret.push('DEDENT' + lineNo + ' \n');
       }
     }
     debug('returning=' + ret.join(''))

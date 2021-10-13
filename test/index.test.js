@@ -13,7 +13,8 @@ function findFirstDifferentCharacter(str1, str2) {
   if (str1 === str2) {
     return -1
   }
-  for (let index = 0; index < Math.min(str1.length, str2.length); index++) {
+  let index
+  for (index = 0; index < Math.min(str1.length, str2.length); index++) {
     const char = str1[index];
     if (char !== str2[index]) {
       return index
@@ -28,7 +29,7 @@ chai.Assertion.overwriteMethod('equal', function (_super) {
     if (typeof obj === 'string' && typeof obj2 === 'string' && 
         obj.length > 20) {
 
-      const context = 5
+      const context = 15
       const firstDiffInx = findFirstDifferentCharacter(obj, obj2)
       const expMsg = '...' + obj.substring(Math.max(0, firstDiffInx - context), Math.min(obj.length, firstDiffInx + context)) + '...'
       const actMsg = '...' + obj2.substring(Math.max(0, firstDiffInx - context), Math.min(obj2.length, firstDiffInx + context)) + '...'
@@ -160,7 +161,10 @@ NODENT42 jQuery(() => {
 INDENT43 $("#bandwagonLink").one("mouseenter", function() {
 INDENT44 $(this).fadeOut(2000);
 DEDENT45 });
-DEDENT45 DEDENT45 DEDENT45 `)
+DEDENT45 
+DEDENT45 
+DEDENT45 
+`)
       }))
   })
 })
