@@ -17,24 +17,28 @@ If true, line numbers will be printed before the indent indicator: `1|NODENT ...
 
 ### Output
 With line numbers first:
-```shell
+```text
 1|NODENT script. 2|INDENT if (foo) { 4|INDENT bar(); 6|DEDENT } 99999|DEDENT
 ```
 
 With line numbers second:
-```shell
+```text
 NODENT1 script. INDENT2 if (foo) { INDENT4 bar(); DEDENT6 } DEDENT99999 
 ```
 
 ## Test
 
+```shell
 npm test
+```
 
 ...and...
 
+```shell
 node fixture.js <test name>
+```
 
-<test name> is the file prefix in the test/ directory, such as xml.
+&lt;test name&gt; is the file prefix in the test/ directory, such as "xml".
 
 I haven't got around to automating these tests.
 
@@ -67,3 +71,6 @@ Whether the line number prefixes the indentation indicator can be changed:
 ```shell
 node src/index.js test/script.whitespace.in - true
 ```
+
+## Issues
+I currently limit the number of lines to 99,998. This is purely arbitrary and can be increased if needed.
