@@ -1,0 +1,1 @@
+NODENT - INDENT list = ["uno", "dos", "tres", INDENT "cuatro", "cinco", "seis"]; DEDENT DEDENT //- Without a block, the element is accepted and no code is generated NODENT - NODENT each item in list INDENT - INDENT string = item.charAt(0) INDENT .toUpperCase() + DEDENT item.slice(1); DEDENT li= string DEDENT99999 

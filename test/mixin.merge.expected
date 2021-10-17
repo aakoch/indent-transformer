@@ -1,0 +1,1 @@
+NODENT mixin foo INDENT p.bar&attributes(attributes) One NODENT p.baz.quux&attributes(attributes) Two NODENT p&attributes(attributes) Three NODENT p.bar&attributes(attributes)(class="baz") Four DEDENT body INDENT +foo.hello NODENT +foo#world NODENT +foo.hello#world NODENT +foo.hello.world NODENT +foo(class="hello") NODENT +foo.hello(class="world") NODENT +foo DEDENT99999 

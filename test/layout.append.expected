@@ -1,0 +1,1 @@
+NODENT extends ../fixtures/append/app-layout.pug NODENT block append head INDENT script(src='foo.js') NODENT script(src='bar.js') DEDENT99999 

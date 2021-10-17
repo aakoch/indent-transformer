@@ -1,0 +1,1 @@
+NODENT script. INDENT if (foo) { INDENT bar(); DEDENT } DEDENT script!= 'foo()' NODENT script foo() NODENT script 

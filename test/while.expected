@@ -1,0 +1,1 @@
+NODENT - var x = 1; NODENT ul INDENT while x < 10 INDENT - x++; NODENT li= x DEDENT99999 DEDENT99999 

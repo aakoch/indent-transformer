@@ -1,0 +1,1 @@
+NODENT script(type='text/javascript') INDENT :coffee-script INDENT regexp = /\n/ DEDENT :coffee-script(minify=true) INDENT math = INDENT square: (value) -> value * value DEDENT99999 DEDENT99999 DEDENT99999 

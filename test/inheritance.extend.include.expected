@@ -1,0 +1,1 @@
+NODENT extend auxiliary/layout.include.pug NODENT block head INDENT script(src='jquery.js') DEDENT block content INDENT h2 Page NODENT p Some content DEDENT block window-content INDENT h2 Awesome NODENT p Now we can extend included blocks! DEDENT99999 

@@ -1,0 +1,1 @@
+NODENT doctype html NODENT html INDENT head INDENT title escape-test DEDENT body INDENT textarea INDENT - var txt = '<param name="flashvars" value="a=&quot;value_a&quot;&b=&quot;value_b&quot;&c=3"/>' DEDENT             DEDENT             DEDENT             #{txt} 

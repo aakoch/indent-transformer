@@ -1,20 +1,24 @@
-import path from 'path'
+import { fileURLToPath } from 'url';
+import fs from 'fs'
 import stream from 'stream'
 import debugFunc from 'debug'
 import WrapLine from '@jaredpalmer/wrapline'
-import { fileURLToPath } from 'url';
-import fs from 'fs'
-const __filename = fileURLToPath(import.meta.url);
 const debug = debugFunc('indent-transformer')
-const debug2 = debugFunc('indent-transformer2')
+const __filename = fileURLToPath(import.meta.url);
 
 let lineNoAfter = false
 
 const indentTransformer = {
+  encoding: 'utf-8',
   flush(callback) {
     while (1 < this.stack[0]) {
       this.stack.shift()
-      this.push('DEDENT99999 ');
+      if (lineNoAfter) {
+        this.push('DEDENT99999 ');
+      }
+      else {
+        this.push('99999|DEDENT ');
+      }
     }
     callback()
   },
@@ -28,7 +32,7 @@ const indentTransformer = {
     debug('matches1=' + matches1)
     for (const match of matches1) {
       const chunky = match[0].substring(0, match[0].length - 1)
-      debug2('chunky=', chunky)
+      debug('chunky=', chunky)
       const indexOfPipe = chunky.indexOf('|')
       debug('indexOfPipe=' + indexOfPipe)
 
@@ -74,7 +78,7 @@ const indentTransformer = {
               ret.push('DEDENT' + lineNo + ' ' + line.trim() + ' ')
             }
             else {
-              ret.push((lineNo.length ? lineNo + '|' : '') +'DEDENT' + ' ' + line.trim() + ' ')
+              ret.push((lineNo.length ? lineNo + '|' : '') + 'DEDENT' + ' ' + line.trim() + ' ')
             }
             debug('after shift: this.stack=', this.stack)
             debug('after shift: ret=', ret)
@@ -128,7 +132,23 @@ if (process.argv[1] == __filename) {
     }
   });
 
-  const fileOut = fs.createWriteStream('out.txt')
+  let outStream
+  if (process.argv[3] && process.argv[3] != '-') {
+    outStream = fs.createWriteStream(process.argv[3])
+    debug('outStream = file ' + process.argv[3])
+  }
+  else {
+    outStream = process.stdout
+    debug('outStream = process.stdout')
+  }
+
+  if (process.argv[4] && process.argv[4] == 'true') {
+    lineNoAfter = false
+  }
+  else {
+    lineNoAfter = true
+  }
+
   fileReader
     .pipe(WrapLine('|'))
     .pipe(WrapLine(function (pre, line) {
@@ -136,9 +156,8 @@ if (process.argv[1] == __filename) {
       pre = pre || 0
       return pre + 1
     }))
-    .pipe(indentTransformer)
-    // .pipe(fileOut)
-    .pipe(process.stdout)
+    .pipe(new stream.Transform(indentTransformer))
+    .pipe(outStream)
 }
 
 export default (opts) => {

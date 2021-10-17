@@ -1,0 +1,1 @@
+NODENT doctype html NODENT html INDENT body NODENT - var s = 'this' NODENT case s INDENT //- Comment NODENT when 'this' INDENT p It's this! DEDENT when 'that' DEDENT99999 DEDENT99999 

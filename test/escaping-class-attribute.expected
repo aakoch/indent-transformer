@@ -1,0 +1,1 @@
+NODENT foo(attr="<%= bar %>") NODENT foo(class="<%= bar %>") NODENT foo(attr!="<%= bar %>") NODENT foo(class!="<%= bar %>") NODENT foo(class!="<%= bar %> lol rofl") NODENT foo(class!="<%= bar %> lol rofl <%= lmao %>") 

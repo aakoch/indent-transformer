@@ -1,0 +1,1 @@
+NODENT extend auxiliary/layout.pug NODENT mixin article(title) INDENT if title INDENT h1= title DEDENT block DEDENT block content INDENT +article("The meaning of life") INDENT p Foo bar baz! DEDENT99999 DEDENT99999 

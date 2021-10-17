@@ -1,0 +1,1 @@
+NODENT - var user = { name: 'tobi' } NODENT foo(data-user=user) NODENT foo(data-items=[1,2,3]) NODENT foo(data-username='tobi') NODENT foo(data-escaped={message: "Let's rock!"}) NODENT foo(data-ampersand={message: "a quote: &quot; this & that"}) NODENT foo(data-epoc=new Date(0)) 

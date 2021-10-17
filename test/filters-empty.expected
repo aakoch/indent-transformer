@@ -1,0 +1,1 @@
+NODENT - var users = [{ name: 'tobi', age: 2 }] NODENT fb:users INDENT for user in users INDENT fb:user(age=user.age) INDENT :cdata DEDENT99999 DEDENT99999 DEDENT99999 

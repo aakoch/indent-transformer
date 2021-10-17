@@ -1,0 +1,1 @@
+NODENT p bing #[strong foo] bong NODENT p. INDENT bing NODENT #[strong foo] NODENT #[strong= '[foo]'] NODENT #[- var foo = 'foo]'] NODENT bong DEDENT p NODENT   bing NODENT   #[strong foo] NODENT   #[strong= '[foo]'] NODENT   #[- var foo = 'foo]'] NODENT   bong NODENT p. INDENT \#[strong escaped] NODENT \#[#[strong escaped] DEDENT99999 

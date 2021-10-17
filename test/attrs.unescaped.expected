@@ -1,0 +1,1 @@
+NODENT script(type='text/x-template') INDENT div(id!='user-<%= user.id %>') DEDENT99999 
