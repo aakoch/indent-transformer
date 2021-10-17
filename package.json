@@ -20,9 +20,9 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.3.4",
+    "chai-equal-for-long-text": "^0.2.1",
     "filecompare": "^1.0.4",
-    "mocha": "^9.1.2",
-    "chai-equal-for-long-text": "file:../chai-equal-for-long-text"
+    "mocha": "^9.1.2"
   },
   "dependencies": {
     "@jaredpalmer/wrapline": "^2.0.2",
