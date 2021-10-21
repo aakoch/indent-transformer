@@ -1,6 +1,6 @@
 # indent-transformer
 
-Using Node's Streams, this package takes a file with indentations and converts it into a stream with "INDENT", "DEDENT" or "NODENT". I'm using it to parse Pug files.
+Using Node's Streams, this package takes a file with indentations and converts it into a stream with "IN" (INdent), "DE" (DEdent) or "NO" (NOdent). I'm using it to parse Pug files.
 
 ## Usage
 
@@ -32,16 +32,6 @@ NODENT1 script. INDENT2 if (foo) { INDENT4 bar(); DEDENT6 } DEDENT99999
 npm test
 ```
 
-...and...
-
-```shell
-node fixture.js <test name>
-```
-
-&lt;test name&gt; is the file prefix in the test/ directory, such as "xml".
-
-I haven't got around to automating these tests.
-
 ## Debugging
 
 Prefix the command with "DEBUG='indent-transformer'". 
@@ -53,8 +43,6 @@ DEBUG='indent-transformer' node src/index.js test/script.whitespace.in -
 ## TODO
 
 Allow for no line numbers to be in output stream.
-
-Allow for different (or no) delimiter between line number and indicator.
 
 ## Undocumented Features
 
