@@ -44,7 +44,7 @@ describe('test without line numbers', function () {
       .pipe(concat({}, (body) => {
         const actual = body.toString();
         debug('actual=' + actual)
-        expect(actual).to.equal('NODENT div INDENT p This text belongs to the paragraph tag. NODENT br NODENT . INDENT This text belongs to the div tag. DEDENT DEDENT ')
+        expect(actual).to.equal('NO divIN p This text belongs to the paragraph tag.NO brNO .IN This text belongs to the div tag.DE DE ')
         console.log('done')
         done()
       }))

@@ -1,1 +1,0 @@
-NODENT mixin list(tag, ...items) INDENT #{tag} INDENT each item in items INDENT li= item DEDENT DEDENT DEDENT +list('ul', 1, 2, 3, 4) 

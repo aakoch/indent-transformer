@@ -1,1 +1,0 @@
-NODENT a(class=['foo', 'bar', 'baz']) NODENT a.foo(class='bar').baz NODENT a.foo-bar_baz NODENT a(class={foo: true, bar: false, baz: true}) 

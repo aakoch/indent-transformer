@@ -1,1 +1,0 @@
-NODENT script#user-template(type='text/template') INDENT #user INDENT h1 <%= user.name %> NODENT p <%= user.description %> DEDENT DEDENT script#user-template(type='text/template'). INDENT if (foo) { INDENT bar(); DEDENT99999 DEDENT99999 

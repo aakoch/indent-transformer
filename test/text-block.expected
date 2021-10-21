@@ -1,1 +1,0 @@
-NODENT label Username: INDENT input(type='text', name='user[name]') DEDENT label Password: 

@@ -1,1 +1,0 @@
-NODENT script INDENT :cdata:uglify-js INDENT (function() { INDENT console.log('test') DEDENT })() DEDENT DEDENT script INDENT :cdata:uglify-js:coffee-script INDENT (-> INDENT console.log 'test' DEDENT )() DEDENT99999 DEDENT99999 

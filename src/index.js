@@ -8,16 +8,20 @@ const __filename = fileURLToPath(import.meta.url);
 
 let lineNoAfter = false
 
+String.prototype.ltrim = function () {
+  return this.replace(/^\s+/, '')
+}
+
 const indentTransformer = {
   encoding: 'utf-8',
   flush(callback) {
     while (1 < this.stack[0]) {
       this.stack.shift()
       if (lineNoAfter) {
-        this.push('DEDENT99999 ');
+        this.push('DE99999 ');
       }
       else {
-        this.push('99999|DEDENT ');
+        this.push('99999|DE ');
       }
     }
     callback()
@@ -53,10 +57,10 @@ const indentTransformer = {
           if (numOfSpaces > this.stack[0]) {
             this.stack.unshift(numOfSpaces)
             if (lineNoAfter) {
-              ret.push('INDENT' + lineNo + ' ' + line.trim() + ' ')
+              ret.push('IN' + lineNo + ' ' + line.ltrim())
             }
             else {
-              ret.push((lineNo.length ? lineNo + '|' : '') + 'INDENT' + ' ' + line.trim() + ' ')
+              ret.push((lineNo.length ? lineNo + '|' : '') + 'IN' + ' ' + line.ltrim())
             }
           }
           else if (numOfSpaces < this.stack[0]) {
@@ -66,29 +70,29 @@ const indentTransformer = {
               debug('inside while loop')
               this.stack.shift()
               if (lineNoAfter) {
-                ret.push('DEDENT' + lineNo + ' ')
+                ret.push('DE' + lineNo + ' ')
               }
               else {
-                ret.push((lineNo.length ? lineNo + '|' : '') + 'DEDENT' + ' ')
+                ret.push((lineNo.length ? lineNo + '|' : '') + 'DE')
               }
             }
             debug('exited while loop')
             this.stack.shift()
             if (lineNoAfter) {
-              ret.push('DEDENT' + lineNo + ' ' + line.trim() + ' ')
+              ret.push('DE' + lineNo + ' ' + line.ltrim())
             }
             else {
-              ret.push((lineNo.length ? lineNo + '|' : '') + 'DEDENT' + ' ' + line.trim() + ' ')
+              ret.push((lineNo.length ? lineNo + '|' : '') + 'DE' + ' ' + line.ltrim())
             }
             debug('after shift: this.stack=', this.stack)
             debug('after shift: ret=', ret)
           }
           else {
             if (lineNoAfter) {
-              ret.push('NODENT' + lineNo + ' ' + line.trim() + ' ')
+              ret.push('NO' + lineNo + ' ' + line.ltrim())
             }
             else {
-              ret.push((lineNo.length ? lineNo + '|' : '') + 'NODENT' + ' ' + line.trim() + ' ')
+              ret.push((lineNo.length ? lineNo + '|' : '') + 'NO' + ' ' + line.ltrim())
             }
           }
         }
@@ -99,10 +103,10 @@ const indentTransformer = {
           this.stack.shift()
           debug('after shift: this.stack=', this.stack)
           if (lineNoAfter) {
-            ret.push('DEDENT' + lineNo + ' ');
+            ret.push('DE' + lineNo + ' ');
           }
           else {
-            ret.push((lineNo.length ? lineNo + '|' : '') + 'DEDENT' + ' ');
+            ret.push((lineNo.length ? lineNo + '|' : '') + 'DE');
           }
         }
       }

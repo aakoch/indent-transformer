@@ -1,1 +1,0 @@
-NODENT //- regression test for https://github.com/pugjs/pug/issues/1435 NODENT include ../fixtures/mixin-include.pug 

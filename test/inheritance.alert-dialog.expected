@@ -1,1 +1,0 @@
-NODENT extends auxiliary/dialog.pug NODENT block content INDENT h1 Alert! NODENT p I'm an alert! DEDENT99999 

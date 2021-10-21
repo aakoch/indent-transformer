@@ -1,1 +1,0 @@
-NODENT // foo NODENT ul INDENT // bar NODENT li one NODENT // baz NODENT li two DEDENT // INDENT ul INDENT li foo DEDENT DEDENT // block INDENT // inline follow NODENT li three DEDENT // block INDENT // inline followed by tags NODENT ul INDENT li four DEDENT DEDENT //if IE lt 9 INDENT // inline NODENT script(src='/lame.js') NODENT // end-inline DEDENT p five 

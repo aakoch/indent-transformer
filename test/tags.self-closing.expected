@@ -1,1 +1,0 @@
-NODENT body INDENT foo NODENT foo(bar='baz') NODENT foo/ NODENT foo(bar='baz')/ NODENT foo / NODENT foo(bar='baz') / NODENT #{'foo'}/ NODENT #{'foo'}(bar='baz')/ NODENT #{'foo'} / NODENT #{'foo'}(bar='baz') / NODENT //- can have a single space after them NODENT img NODENT //- can have lots of white space after them NODENT img NODENT #{ INDENT 'foo' DEDENT }/ DEDENT99999 

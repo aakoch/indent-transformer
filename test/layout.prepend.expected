@@ -1,1 +1,0 @@
-NODENT extends ../fixtures/prepend/app-layout.pug NODENT block prepend head INDENT script(src='foo.js') NODENT script(src='bar.js') DEDENT99999 

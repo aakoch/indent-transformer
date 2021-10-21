@@ -1,1 +1,0 @@
-NODENT html INDENT body INDENT - var friends = 1 NODENT case friends INDENT when 0 INDENT p you have no friends DEDENT when 1 INDENT p you have a friend DEDENT default DEDENT99999 DEDENT99999 DEDENT99999 

@@ -1,1 +1,0 @@
-NODENT - var version = 1449104952939 NODENT <ul> INDENT <li>foo</li> NODENT <li>bar</li> NODENT <li>baz</li> DEDENT </ul> NODENT <!--build:js /js/app.min.js?v=#{version}--> NODENT <!--endbuild--> NODENT p You can <em>embed</em> html as well. NODENT p: <strong>Even</strong> as the body of a block expansion. 
