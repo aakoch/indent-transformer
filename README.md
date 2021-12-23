@@ -62,3 +62,8 @@ node src/index.js test/script.whitespace.in - true
 
 ## Issues
 I currently limit the number of lines to 99,998. This is purely arbitrary and can be increased if needed.
+
+# Build
+
+`npm run build`
+`npm version [major|minor|patch]`
