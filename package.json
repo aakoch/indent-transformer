@@ -16,7 +16,9 @@
     "stream",
     "transform",
     "indentation",
-    "text"
+    "text",
+    "indent",
+    "whitespace"
   ],
   "author": "Adam Koch (aakoch)",
   "license": "MIT",
