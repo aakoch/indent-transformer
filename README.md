@@ -1,6 +1,6 @@
 # indent-transformer
 
-Using Node's Streams, this package takes a file with indentations and converts it into a stream with "IN" (INdent), "DE" (DEdent) or "NO" (NOdent). I'm using it to parse Pug files.
+Using Node's Streams, this package takes a file with indentations and converts it into a stream with "IN" (INdent), "DE" (DEdent) or "NO" (NOdent) followed by a space.
 
 ## Usage
 
@@ -42,7 +42,7 @@ DEBUG='indent-transformer' node src/index.js test/script.whitespace.in -
 ```
 ## TODO
 
-Allow for no line numbers to be in output stream.
+1. Allow for no line numbers to be in output stream.
 
 ## Undocumented Features
 

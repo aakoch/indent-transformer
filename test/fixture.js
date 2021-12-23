@@ -32,12 +32,12 @@ else {
   const expected = fs.readFileSync(expectedFileName)
   const actualOut = fs.createWriteStream(actualOutFileName, { encoding: 'utf8' })
   fileInStream.pipe(transformStream).pipe(actualOut);
-  
-  var cb = function(isEqual) {
+
+  var cb = function (isEqual) {
     console.log("equal? :" + isEqual);
   }
 
   fileInStream.on('close', () => {
-    fc(expectedFileName,actualOutFileName,cb);
+    fc(expectedFileName, actualOutFileName, cb);
   })
 }

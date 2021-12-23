@@ -4,7 +4,6 @@ import _transformStream from '../src/index.js'
 const expect = chai.expect
 import stream from 'stream'
 const transformStream = _transformStream()
-import intoStream from 'into-stream'
 import concat from 'concat-stream'
 import WrapLine from '@jaredpalmer/wrapline'
 import { debug } from 'console'
@@ -20,7 +19,7 @@ describe('test without line numbers', function () {
   .
     This text belongs to the div tag.`
 
-    const inStream = intoStream(input)
+    const inStream = stream.Readable.from(input)
     inStream.on('error', function (e) {
       console.error(e)
     })

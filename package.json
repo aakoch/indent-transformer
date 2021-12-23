@@ -2,11 +2,13 @@
   "name": "indent-transformer",
   "version": "0.3.0",
   "description": "Transform stream to take lines and return indentation indicators",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "source": "src/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "build": "parcel build",
     "test": "mocha test/*.test.*",
     "postversion": "git push && git push --tags"
   },
@@ -22,15 +24,24 @@
     "chai": "^4.3.4",
     "chai-equal-for-long-text": "^0.2.1",
     "filecompare": "^1.0.4",
-    "mocha": "^9.1.2"
+    "mocha": "^9.1.2",
+    "parcel": "^2.0.1"
   },
   "dependencies": {
     "@jaredpalmer/wrapline": "^2.0.2",
     "command-line-args": "^5.2.0",
     "concat-stream": "^2.0.0",
     "debug": "^4.3.2",
-    "into-stream": "^7.0.0",
     "line-transform": "^0.1.0"
   },
-  "type": "module"
+  "type": "module",
+  "engines": {
+    "node": ">=8"
+  },
+  "targets": {
+    "main": {
+      "optimize": true,
+      "isLibrary": true
+    }
+  }
 }

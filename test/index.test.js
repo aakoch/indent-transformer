@@ -3,7 +3,6 @@ import equal from 'chai-equal-for-long-text'
 import transformStream from '../src/index.js'
 const expect = chai.expect
 import stream from 'stream'
-import intoStream from 'into-stream'
 import concat from 'concat-stream'
 import WrapLine from '@jaredpalmer/wrapline'
 import { debug } from 'console'
@@ -58,7 +57,7 @@ block body
         $(this).fadeOut(2000);
       });`
 
-    const inStream = intoStream(input)
+    const inStream = stream.Readable.from(input)
     inStream.on('error', function (e) {
       console.error(e)
     })

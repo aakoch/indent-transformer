@@ -8,8 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 
 let lineNoAfter = false
 
-String.prototype.ltrim = function () {
-  return this.replace(/^\s+/, '')
+const ltrim = function (str) {
+  return str.replace(/^\s+/, '')
 }
 
 const indentTransformer = {
@@ -57,10 +57,10 @@ const indentTransformer = {
           if (numOfSpaces > this.stack[0]) {
             this.stack.unshift(numOfSpaces)
             if (lineNoAfter) {
-              ret.push('IN' + lineNo + ' ' + line.ltrim())
+              ret.push('IN' + lineNo + ' ' + ltrim(line))
             }
             else {
-              ret.push((lineNo.length ? lineNo + '|' : '') + 'IN' + ' ' + line.ltrim())
+              ret.push((lineNo.length ? lineNo + '|' : '') + 'IN' + ' ' + ltrim(line))
             }
           }
           else if (numOfSpaces < this.stack[0]) {
@@ -79,20 +79,20 @@ const indentTransformer = {
             debug('exited while loop')
             this.stack.shift()
             if (lineNoAfter) {
-              ret.push('DE' + lineNo + ' ' + line.ltrim())
+              ret.push('DE' + lineNo + ' ' + ltrim(line))
             }
             else {
-              ret.push((lineNo.length ? lineNo + '|' : '') + 'DE' + ' ' + line.ltrim())
+              ret.push((lineNo.length ? lineNo + '|' : '') + 'DE' + ' ' + ltrim(line))
             }
             debug('after shift: this.stack=', this.stack)
             debug('after shift: ret=', ret)
           }
           else {
             if (lineNoAfter) {
-              ret.push('NO' + lineNo + ' ' + line.ltrim())
+              ret.push('NO' + lineNo + ' ' + ltrim(line))
             }
             else {
-              ret.push((lineNo.length ? lineNo + '|' : '') + 'NO' + ' ' + line.ltrim())
+              ret.push((lineNo.length ? lineNo + '|' : '') + 'NO' + ' ' + ltrim(line))
             }
           }
         }
