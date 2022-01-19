@@ -1,5 +1,6 @@
 import chai from 'chai'
 import equal from 'chai-equal-for-long-text'
+import WrapLine from '@jaredpalmer/wrapline'
 import _transformStream from '../src/index.js'
 const transformStream = _transformStream({ encoding: 'utf8' })
 import fs from 'fs'
@@ -31,7 +32,13 @@ if (options.snapshot) {
 else {
   const expected = fs.readFileSync(expectedFileName)
   const actualOut = fs.createWriteStream(actualOutFileName, { encoding: 'utf8' })
-  fileInStream.pipe(transformStream).pipe(actualOut);
+  fileInStream
+  .pipe(WrapLine('|'))
+  .pipe(WrapLine(function (pre, line) {
+    // add 'line numbers' to each line
+    pre = pre || 0
+    return pre + 1
+  })).pipe(transformStream).pipe(actualOut);
 
   var cb = function (isEqual) {
     console.log("equal? :" + isEqual);

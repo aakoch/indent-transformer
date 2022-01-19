@@ -1,0 +1,1 @@
+NO1 -IN2 string = item.charAt(0)IN3 .toUpperCase() +DE4 item.slice(1);DE5 li= string
