@@ -4,6 +4,7 @@ import stream from 'stream'
 import debugFunc from 'debug'
 import WrapLine from '@jaredpalmer/wrapline'
 const debug = debugFunc('indent-transformer')
+const trace = debugFunc('indent-transformer:trace')
 const __filename = fileURLToPath(import.meta.url);
 
 let lineNoAfter = false
@@ -33,26 +34,26 @@ const indentTransformer = {
 
     const matches1 = chunk.matchAll(/.*\n/g)
 
-    debug('matches1=' + matches1)
+    trace('matches1=' + matches1)
     for (const match of matches1) {
       const chunky = match[0].substring(0, match[0].length - 1)
-      debug('chunky=', chunky)
+      trace('chunky=', chunky)
       const indexOfPipe = chunky.indexOf('|')
-      debug('indexOfPipe=' + indexOfPipe)
+      trace('indexOfPipe=' + indexOfPipe)
 
       const lineNo = chunky.substring(0, indexOfPipe)
-      debug('lineNo=' + lineNo)
+      trace('lineNo=' + lineNo)
 
       let line = chunky.substring(indexOfPipe + 1)
-      debug('line=', line)
+      trace('line=', line)
 
       if (line.trim().length > 0) {
         const matches = line.match(/(  |\t)*/)
-        debug('matches=', matches)
+        trace('matches=', matches)
 
         if (matches) {
           let numOfSpaces = matches[0].toString().length
-          debug('numOfSpaces=' + numOfSpaces + ', this.stack[0]=' + this.stack[0] + ', this.stack=', this.stack)
+          trace('numOfSpaces=' + numOfSpaces + ', this.stack[0]=' + this.stack[0] + ', this.stack=', this.stack)
 
           if (numOfSpaces > this.stack[0]) {
             this.stack.unshift(numOfSpaces)
@@ -64,10 +65,10 @@ const indentTransformer = {
             }
           }
           else if (numOfSpaces < this.stack[0]) {
-            debug('before shift: this.stack=', this.stack)
-            debug('numOfSpaces < this.stack[1]', numOfSpaces < this.stack[1])
+            trace('before shift: this.stack=', this.stack)
+            trace('numOfSpaces < this.stack[1]', numOfSpaces < this.stack[1])
             while (numOfSpaces < this.stack[1]) {
-              debug('inside while loop')
+              trace('inside while loop')
               this.stack.shift()
               if (lineNoAfter) {
                 ret.push('DE' + lineNo + ' ')
@@ -76,7 +77,7 @@ const indentTransformer = {
                 ret.push((lineNo.length ? lineNo + '|' : '') + 'DE')
               }
             }
-            debug('exited while loop')
+            trace('exited while loop')
             this.stack.shift()
             if (lineNoAfter) {
               ret.push('DE' + lineNo + ' ' + ltrim(line))
@@ -84,8 +85,8 @@ const indentTransformer = {
             else {
               ret.push((lineNo.length ? lineNo + '|' : '') + 'DE' + ' ' + ltrim(line))
             }
-            debug('after shift: this.stack=', this.stack)
-            debug('after shift: ret=', ret)
+            trace('after shift: this.stack=', this.stack)
+            trace('after shift: ret=', ret)
           }
           else {
             if (lineNoAfter) {
@@ -99,9 +100,9 @@ const indentTransformer = {
       }
       if (this.ended) {
         while (0 < this.stack[0]) {
-          debug('before shift: this.stack=', this.stack)
+          trace('before shift: this.stack=', this.stack)
           this.stack.shift()
-          debug('after shift: this.stack=', this.stack)
+          trace('after shift: this.stack=', this.stack)
           if (lineNoAfter) {
             ret.push('DE' + lineNo + ' ');
           }
