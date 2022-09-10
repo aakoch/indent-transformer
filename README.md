@@ -69,4 +69,8 @@ I currently limit the number of lines to 99,998. This is purely arbitrary and ca
 
 `npm run build`
 
+# Publish
+
 `npm version [major|minor|patch]`
+
+`npm publish --access public`
