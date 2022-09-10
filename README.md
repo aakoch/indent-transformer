@@ -42,7 +42,8 @@ DEBUG='indent-transformer' node src/index.js test/script.whitespace.in -
 ```
 ## TODO
 
-1. Allow for no line numbers to be in output stream.
+1. Allow for no line numbers to be in output stream
+2. Switch to TAP for testing -- currently uses Mocha and doesn't have code coverage
 
 ## Undocumented Features
 
@@ -66,4 +67,5 @@ I currently limit the number of lines to 99,998. This is purely arbitrary and ca
 # Build
 
 `npm run build`
+
 `npm version [major|minor|patch]`
