@@ -44,6 +44,7 @@ DEBUG='indent-transformer' node src/index.js test/script.whitespace.in -
 
 1. Allow for no line numbers to be in output stream
 2. Switch to TAP for testing -- currently uses Mocha and doesn't have code coverage
+3. Replace Minimist with @foo-dog/utils
 
 ## Undocumented Features
 
