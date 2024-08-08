@@ -38,7 +38,7 @@ Prefix the command with "DEBUG='indent-transformer'".
 
 Example:
 ```shell
-DEBUG='indent-transformer' node src/index.js test/script.whitespace.in -
+DEBUG='indent-transformer' node src/index.ts test/script.whitespace.in -
 ```
 ## TODO
 
@@ -50,16 +50,16 @@ DEBUG='indent-transformer' node src/index.js test/script.whitespace.in -
 
 *Might disappear at any time*
 
-Call index.js with an input file and output file. "-" for the output file prints to stdout.
+Call index.ts with an input file and output file. "-" for the output file prints to stdout.
 
 ```shell
-node src/index.js test/script.whitespace.in -
+node src/index.ts test/script.whitespace.in -
 ```
 
 Whether the line number prefixes the indentation indicator can be changed:
 
 ```shell
-node src/index.js test/script.whitespace.in - true
+node src/index.ts test/script.whitespace.in - true
 ```
 
 ## Issues
